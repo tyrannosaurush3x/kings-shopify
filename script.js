@@ -46,21 +46,15 @@ analytics.subscribe('checkout_completed', (event) => {
 
   const checkoutTotalPrice = checkout.totalPrice?.amount;
 
-  const checkoutId = checkout.token;
-  const checkoutId2 = event.id;
-  console.log("ID1", checkoutId)
-  console.log("ID2", checkoutId2)
+  const checkoutId = checkout.order.id;
   var raw = JSON.stringify({
     "user": {
       "id": shop_id
     },
-    "itemAction": 'Purchase',
+    "action": "Purchase",
     "order": {
       "Product": {
         "orderId": checkoutId,
-        "lineItems": [
-          {"id": "123"}
-        ]
       }
     }
   }
@@ -71,9 +65,9 @@ analytics.subscribe('checkout_completed', (event) => {
     body: raw,
     redirect: 'follow'
   };
-  // fetch("https://sacramentokings.us-6.evergage.com/api2/event/shopify_test", requestOptions)
-  //   .then(response => response.text())
-  //   .then(result => console.log(result))
-  //   .catch(error => console.log('error', error));
+  fetch("https://sacramentokings.us-6.evergage.com/api2/event/shopify_test", requestOptions)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
 });
 
