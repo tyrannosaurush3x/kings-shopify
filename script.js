@@ -33,5 +33,5 @@ analytics.subscribe('cart_viewed', (event) =>{
     var id = line_items[i].merchandise.product.id
     ids.push(id)
   }
-  console.log(ids)
+  console.log("ids are here", ids)
 })
