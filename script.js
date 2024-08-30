@@ -43,7 +43,7 @@ analytics.subscribe('cart_viewed', (event) => {
 analytics.subscribe('checkout_completed', (event) => {
   // Example for accessing event data
   const checkout = event.data.checkout;
-
+  var shop_id = event.clientId
   const checkoutTotalPrice = checkout.totalPrice?.amount;
 
   const checkoutId = checkout.order.id;
