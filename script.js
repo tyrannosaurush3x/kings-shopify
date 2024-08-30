@@ -30,7 +30,7 @@ analytics.subscribe('cart_viewed', (event) =>{
   var line_items = 	event.data.cart.lines;
   var ids = []
   for (var i=0; i<line_items.length; i++) {
-    var id = line_items[i].merchandise
+    var id = line_items[i].merchandise.product.id
     ids.push(id)
   }
   console.log(ids)
