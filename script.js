@@ -7,6 +7,7 @@ const send_event = (raw) => {
     body: raw,
     redirect: 'follow'
   };
+  console.log('The payload:')
   console.log(raw)
   fetch("https://sacramentokings.us-6.evergage.com/api2/event/shopify_test", requestOptions)
     .then(response => response.text())
