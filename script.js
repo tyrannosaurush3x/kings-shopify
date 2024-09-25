@@ -32,7 +32,7 @@ const make_add_remove_cart = (lineItem, shop_id, add_or_remove) => {
   let payload = {
     "interaction": {
       "name": "",
-      "lineItem": { "catalogObjectType": "Product", "catalogObjectId": lineItem.merchandise.id, "price": lineItem.merchandise.price, "quantity": lineItem.quantity }
+      "lineItem": { "catalogObjectType": "Product", "catalogObjectId": lineItem.merchandise.id, "price": lineItem.merchandise.price.amount, "quantity": lineItem.quantity }
     },
     "user": {
       "anonymousId": shop_id,
