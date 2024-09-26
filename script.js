@@ -17,11 +17,12 @@ const send_event = (raw) => {
 
 const make_line_items = (line_items, type) => {
   let sol = []
+  let item = {}
   for (let i = 0; i < line_items.length; i++) {
     if (type == 0) {
-      let item = { "catalogObjectType": "Product", "catalogObjectId": line_items[i].merchandise.product.id, "price": line_items[i].merchandise.product.price, "quantity": line_items[i].quantity }
+      item = { "catalogObjectType": "Product", "catalogObjectId": line_items[i].merchandise.product.id, "price": line_items[i].merchandise.product.price, "quantity": line_items[i].quantity }
     } else {
-      let item = { "catalogObjectType": "Product", "catalogObjectId": line_items[i].id }
+      item = { "catalogObjectType": "Product", "catalogObjectId": line_items[i].id }
     }
     sol.append(item)
   }
