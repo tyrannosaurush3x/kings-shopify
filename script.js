@@ -24,7 +24,7 @@ const make_line_items = (line_items, type) => {
     } else {
       item = { "catalogObjectType": "Product", "catalogObjectId": line_items[i].id }
     }
-    sol.append(item)
+    sol.push(item)
   }
   return sol
 }
