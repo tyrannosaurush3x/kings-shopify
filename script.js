@@ -64,12 +64,12 @@ const make_view_cart = (line_items, shop_id) => {
   return JSON.stringify(payload)
 }
 
-const make_purchase = (line_items, shop_id) => {
+const make_purchase = (line_items, shop_id, value, id) => {
   let payload = {
     "interaction": {
       "name": "Purchase",
-      "id": "",
-      "totalValue": "",
+      "id": id,
+      "totalValue": value,
       "lineItems": []
     },
     "user": {
@@ -83,7 +83,9 @@ const make_purchase = (line_items, shop_id) => {
 }
 
 analytics.subscribe('cart_viewed', (event) => {
-  var raw = make_view_cart(event.data.cart.lines, event.clientId)
+  var totalVal = event.data.checkout.totalPrice
+  var orderId = event.id
+  var raw = make_view_cart(event.data.cart.lines, event.clientId, totalVal, orderId)
   send_event(raw)
 })
 
