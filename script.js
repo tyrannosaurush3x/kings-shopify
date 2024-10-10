@@ -15,6 +15,25 @@ const send_event = (raw) => {
     .catch(error => console.log('error', error));
 }
 
+const get_mcp_cookie = () => {
+  const uuidPattern = /uuid/;
+  const cookies = document.cookie.split(';');
+  for (let cookie of cookies) {
+    cookie = cookie.trim();
+    if (cookie.includes('evg')) {
+      const [name, value] = cookie.split('=');
+      if (uuidPattern.test(value)) {
+        let parsed_id = JSON.parse(decodeURIComponent(value))['uuid']
+        return parsed_id.trim()
+      }
+    }
+  }
+  return null;
+}
+
+const user_anon_id = get_mcp_cookie()
+console.log('here is the mcp cookie', user_anon_id)
+
 const make_line_items = (line_items, type) => {
   let sol = []
   let item = {}
