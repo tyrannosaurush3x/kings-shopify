@@ -31,8 +31,12 @@ const get_mcp_cookie = () => {
   return null;
 }
 
-const user_anon_id = get_mcp_cookie()
-console.log('here is the mcp cookie', user_anon_id)
+try {
+  const user_anon_id = get_mcp_cookie()
+  console.log('here is the mcp cookie', user_anon_id)
+} catch (e) {
+  console.log('error encountered while trying to anonymous id', e)
+}
 
 const make_line_items = (line_items, type) => {
   let sol = []
