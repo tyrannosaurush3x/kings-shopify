@@ -23,7 +23,7 @@ const get_mcp_cookie = () => {
     if (cookie.includes('evg')) {
       const [name, value] = cookie.split('=');
       if (uuidPattern.test(value)) {
-        let parsed_id = JSON.parse(decodeURIComponent(value))['uuid']
+        let parsed_id = JSON.parse(decodeURIComponent(value)).uuid
         return parsed_id.trim()
       }
     }
