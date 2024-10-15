@@ -126,9 +126,3 @@ analytics.subscribe('product_removed_from_cart', (event) => {
   var raw = make_add_remove_cart(event.data.cartLine, event.clientId, "remove")
   send_event(raw)
 });
-
-try {
-  console.log(document.cookie)
-} catch (e) {
-  console.log('could not access the cookies', e)
-}
