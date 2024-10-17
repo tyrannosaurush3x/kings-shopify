@@ -106,23 +106,23 @@ const make_purchase = (line_items, shop_id, value, id) => {
 }
 
 analytics.subscribe('cart_viewed', (event) => {
-  var totalVal = event.data.checkout.totalPrice
-  var orderId = event.id
-  var raw = make_view_cart(event.data.cart.lines, event.clientId, totalVal, orderId)
+  var raw = make_view_cart(event.data.cart.lines, user_anon_id)
   send_event(raw)
 })
 
 analytics.subscribe('checkout_completed', (event) => {
-  var raw = make_purchase(event.data.checkout.lineItems, event.clientId)
+  var totalVal = event.data.checkout.totalPrice
+  var orderId = event.id
+  var raw = make_purchase(event.data.checkout.lineItems, user_anon_id, totalVal, orderId)
   send_event(raw)
 });
 
 analytics.subscribe('product_added_to_cart', (event) => {
-  var raw = make_add_remove_cart(event.data.cartLine, event.clientId, "add")
+  var raw = make_add_remove_cart(event.data.cartLine, user_anon_id, "add")
   send_event(raw)
 });
 
 analytics.subscribe('product_removed_from_cart', (event) => {
-  var raw = make_add_remove_cart(event.data.cartLine, event.clientId, "remove")
+  var raw = make_add_remove_cart(event.data.cartLine, user_anon_id, "remove")
   send_event(raw)
 });
