@@ -31,13 +31,6 @@ const get_mcp_cookie = () => {
   return null;
 }
 
-try {
-  const user_anon_id = get_mcp_cookie()
-  console.log('here is the mcp cookie', user_anon_id)
-} catch (e) {
-  console.log('error encountered while trying to anonymous id', e)
-}
-
 const make_line_items = (line_items, type) => {
   let sol = []
   let item = {}
@@ -91,13 +84,13 @@ const make_purchase = (line_items, shop_id, value, id) => {
   let payload = {
     "interaction": {
       "name": "Purchase",
-      "id": id,
-      "totalValue": value,
-      "lineItems": []
+      "order": {
+          "id": id,
+        "lineItems": []
+      }
     },
     "user": {
-      "anonymousId": shop_id,
-      "identities": { "shopifyId": shop_id }
+        "anonymousId": shop_id
     }
   }
   sol = make_line_items(line_items, 1)
@@ -106,11 +99,13 @@ const make_purchase = (line_items, shop_id, value, id) => {
 }
 
 analytics.subscribe('cart_viewed', (event) => {
+  const user_anon_id = get_mcp_cookie()
   var raw = make_view_cart(event.data.cart.lines, user_anon_id)
   send_event(raw)
 })
 
 analytics.subscribe('checkout_completed', (event) => {
+  const user_anon_id = get_mcp_cookie()
   var totalVal = event.data.checkout.totalPrice
   var orderId = event.id
   var raw = make_purchase(event.data.checkout.lineItems, user_anon_id, totalVal, orderId)
@@ -118,11 +113,13 @@ analytics.subscribe('checkout_completed', (event) => {
 });
 
 analytics.subscribe('product_added_to_cart', (event) => {
+  const user_anon_id = get_mcp_cookie()
   var raw = make_add_remove_cart(event.data.cartLine, user_anon_id, "add")
   send_event(raw)
 });
 
 analytics.subscribe('product_removed_from_cart', (event) => {
+  const user_anon_id = get_mcp_cookie()
   var raw = make_add_remove_cart(event.data.cartLine, user_anon_id, "remove")
   send_event(raw)
 });
