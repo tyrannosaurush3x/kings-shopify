@@ -94,7 +94,7 @@ const make_purchase = (line_items, shop_id, value, id) => {
     }
   }
   sol = make_line_items(line_items, 1)
-  payload.interaction.lineItems = sol
+  payload.interaction.order.lineItems = sol
   return JSON.stringify(payload)
 }
 
