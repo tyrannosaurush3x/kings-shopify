@@ -9,7 +9,7 @@ const send_event = (raw) => {
   };
   console.log('The payload:')
   console.log(raw)
-  fetch("https://sacramentokings.us-6.evergage.com/api2/event/shopify_test", requestOptions)
+  fetch("https://sacramentokings.us-6.evergage.com/api2/event/engage", requestOptions)
     .then(response => response.text())
     .then(result => console.log(result))
     .catch(error => console.log('error', error));
